@@ -5,6 +5,7 @@ from common.io_blockchain import get_blockchain_from_memory
 from node.new_block_validation.new_block_validation import NewBlock, NewBlockException
 from node.transaction_validation.transaction_validation import Transaction, TransactionException
 from common.block import Block
+import time
 
 app = Flask(__name__)
 initialize_blockchain()
@@ -63,10 +64,13 @@ def get_transaction(transaction_hash):
 
 @app.route("/first_block", methods=['GET'])
 def get_first_block():
-    print("MikkiTA start")
+    print("MikkiTA start")    
     blockchain_base = get_blockchain_from_memory()
+    start = time.time()
     first=first_from_last(blockchain_base)
-    print("MikkiTA end")
+    end = time.time()
+    print("MikkiTA end. time: ",end - start," seconds")   
+
     return jsonify(first.to_dict)
 
 def first_from_last(block_object)-> Block:
