@@ -106,9 +106,9 @@ def first_from_last(block_object)-> Block:
         return first_from_last(block_object.previous_block)
 
 #####add block
-@app.route("/add_block", methods=['GET'])
-def add_block():
-    print("MikkiTA add block start")    
+@app.route("/add_block1", methods=['GET'])
+def add_block1():
+    print("MikkiTA add block camille start")    
     block_1 = get_blockchain_from_memory()
     ##timestamp_3 = datetime.timestamp(datetime.fromisoformat('2011-11-09 00:11:13.333'))
     ##now=datetime.now.strftime("%Y-%m-%d %H:%M:%S.%f")
@@ -132,6 +132,64 @@ def add_block():
         previous_block=block_1,
     )
     store_blockchain_in_memory(block_2)
-    print("MikkiTA add block end") 
+    print("MikkiTA add block camille end") 
     return jsonify(block_2.to_dict)
+######################################################################    
+
+@app.route("/add_block2", methods=['GET'])
+def add_block2():
+    print("MikkiTA add block bertrand start")    
+    block_1 = get_blockchain_from_memory()
+    ##timestamp_3 = datetime.timestamp(datetime.fromisoformat('2011-11-09 00:11:13.333'))
+    ##now=datetime.now.strftime("%Y-%m-%d %H:%M:%S.%f")
+    timestamp_2=datetime.now().isoformat()
+    ##timestamp_2 = datetime.timestamp(datetime.fromisoformat(now))
+    ##timestamp_2 = datetime.now
+        
+    input_0 = TransactionInput(transaction_hash=block_1.transactions[0]["transaction_hash"], output_index=0) 
+    output_0 = TransactionOutput(public_key_hash=bertrand_wallet.public_key_hash, amount=1)
+    transaction_2 = Transaction([input_0], [output_0])
     
+    block_header_2 = BlockHeader(
+        previous_block_hash=block_1.block_header.hash,
+        timestamp=timestamp_2,
+        noonce=block_1.block_header.noonce+1,
+        merkle_root=get_merkle_root([transaction_2.transaction_data])
+    )
+    block_2 = Block(
+        transactions=[transaction_2.transaction_data],
+        block_header=block_header_2,
+        previous_block=block_1,
+    )
+    store_blockchain_in_memory(block_2)
+    print("MikkiTA add block bertrand end") 
+    return jsonify(block_2.to_dict)
+
+@app.route("/add_block3", methods=['GET'])
+def add_block3():
+    print("MikkiTA add block albert start")    
+    block_1 = get_blockchain_from_memory()
+    ##timestamp_3 = datetime.timestamp(datetime.fromisoformat('2011-11-09 00:11:13.333'))
+    ##now=datetime.now.strftime("%Y-%m-%d %H:%M:%S.%f")
+    timestamp_2=datetime.now().isoformat()
+    ##timestamp_2 = datetime.timestamp(datetime.fromisoformat(now))
+    ##timestamp_2 = datetime.now
+        
+    input_0 = TransactionInput(transaction_hash=block_1.transactions[0]["transaction_hash"], output_index=0) 
+    output_0 = TransactionOutput(public_key_hash=albert_wallet.public_key_hash, amount=1)
+    transaction_2 = Transaction([input_0], [output_0])
+    
+    block_header_2 = BlockHeader(
+        previous_block_hash=block_1.block_header.hash,
+        timestamp=timestamp_2,
+        noonce=block_1.block_header.noonce+1,
+        merkle_root=get_merkle_root([transaction_2.transaction_data])
+    )
+    block_2 = Block(
+        transactions=[transaction_2.transaction_data],
+        block_header=block_header_2,
+        previous_block=block_1,
+    )
+    store_blockchain_in_memory(block_2)
+    print("MikkiTA add block albert end") 
+    return jsonify(block_2.to_dict)
