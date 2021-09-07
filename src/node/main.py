@@ -108,7 +108,8 @@ def first_from_last(block_object)-> Block:
 #####add block
 @app.route("/add_block1", methods=['GET'])
 def add_block1():
-    print("MikkiTA add block camille start")    
+    print("MikkiTA add block camille start") 
+    start = time.time()   
     block_1 = get_blockchain_from_memory()
     ##timestamp_3 = datetime.timestamp(datetime.fromisoformat('2011-11-09 00:11:13.333'))
     ##now=datetime.now.strftime("%Y-%m-%d %H:%M:%S.%f")
@@ -133,12 +134,15 @@ def add_block1():
     )
     store_blockchain_in_memory(block_2)
     print("MikkiTA add block camille end") 
+    end = time.time()
+    print("MikkiTA camille add end. time: ",end - start," seconds")  
     return jsonify(block_2.to_dict)
 ######################################################################    
 
 @app.route("/add_block2", methods=['GET'])
 def add_block2():
-    print("MikkiTA add block bertrand start")    
+    print("MikkiTA add block bertrand start")  
+    start = time.time()  
     block_1 = get_blockchain_from_memory()
     ##timestamp_3 = datetime.timestamp(datetime.fromisoformat('2011-11-09 00:11:13.333'))
     ##now=datetime.now.strftime("%Y-%m-%d %H:%M:%S.%f")
@@ -163,11 +167,14 @@ def add_block2():
     )
     store_blockchain_in_memory(block_2)
     print("MikkiTA add block bertrand end") 
+    end = time.time()
+    print("MikkiTA bertrand add end. time: ",end - start," seconds")
     return jsonify(block_2.to_dict)
 
 @app.route("/add_block3", methods=['GET'])
 def add_block3():
-    print("MikkiTA add block albert start")    
+    print("MikkiTA add block albert start")  
+    start = time.time()   
     block_1 = get_blockchain_from_memory()
     ##timestamp_3 = datetime.timestamp(datetime.fromisoformat('2011-11-09 00:11:13.333'))
     ##now=datetime.now.strftime("%Y-%m-%d %H:%M:%S.%f")
@@ -191,5 +198,7 @@ def add_block3():
         previous_block=block_1,
     )
     store_blockchain_in_memory(block_2)
-    print("MikkiTA add block albert end") 
+    print("MikkiTA add block albert end")
+    end = time.time()
+    print("MikkiTA albert add end. time: ",end - start," seconds") 
     return jsonify(block_2.to_dict)
